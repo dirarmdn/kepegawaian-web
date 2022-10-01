@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input-area {
+    @apply bg-ebony-clay-500 border-0 text-gray-900 text-lg font-semibold rounded-xl focus:outline-none focus:bg-gray-300 shadow-md block w-full p-2.5;
+  }
+}
