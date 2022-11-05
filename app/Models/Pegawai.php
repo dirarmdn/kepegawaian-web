@@ -24,6 +24,7 @@ class Pegawai extends Model
         'status_nikah',
         'alamat',
         'foto',
+        'id_golongan',
     ];
     protected $primaryKey = 'id';
 }

@@ -10,17 +10,22 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function login(){
+    public function login() {
         return view('login');
     }
-    public function register(){
+
+    public function register() {
         return view('register');
     }
-    public function logout(){
+
+    public function logout() {
+
         Auth::logout();
         return redirect('/login');
     }
-    public function registeruser(Request $request){
+
+    public function registeruser(Request $request) {
+        
         User::create([
             'name' => $request->name,
             'password' => bcrypt($request->password),
@@ -29,9 +34,11 @@ class LoginController extends Controller
 
         return redirect('login');
     }
-    public function loginuser(Request $request){
+
+    public function loginuser(Request $request) {
+        
         if(Auth::attempt($request->only('name','password'))){
-            return redirect('/data-pegawai');
+            return redirect('/');
         }
 
         return redirect('/login');

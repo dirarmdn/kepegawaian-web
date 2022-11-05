@@ -1,12 +1,33 @@
-@extends('layouts.main')
+@push('css')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" integrity="sha512-oe8OpYjBaDWPt2VmSFR+qYOdnTjeV9QPLJUeqZyprDEQvQLJ9C5PCFclxwNuvb/GQgQngdCXzKSFltuHD3eCxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" integrity="sha512-oe8OpYjBaDWPt2VmSFR+qYOdnTjeV9QPLJUeqZyprDEQvQLJ9C5PCFclxwNuvb/GQgQngdCXzKSFltuHD3eCxA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+@endpush
+
+@extends('layouts.main')
 
 @section('content')
 
 <div class="m-10 mx-auto">
-  <div class="text-3xl text-ebony-clay-900 font-main mb-8 font-bold">Data Pegawai</div>
-  <a href="/tambah-pegawai" class="hover:text-ebony-clay-400 hover:bg-ebony-clay-900 transition-all duration-300 text-ebony-clay-900 shadow-lg py-2 px-3 w-36 bg-[#b2fefe] rounded-lg font-extrabold font-main">+ Tambah Data</a>
+    <div class="text-3xl text-ebony-clay-900 font-main mb-8 font-bold">Data Pegawai</div>
+
+    <div class="flex justify-between">
+        <a href="/pegawai/create" class="add-btn">+ Tambah Data</a>
+        <div class="flex gap-4">
+            <form action="{{ route('pegawai.import') }}" method="post" enctype="multipart/form-data">
+              @csrf
+                <input type="file" name="file" id="" >
+                <button>Upload</button>
+            </form>
+            <div class="gap-5">
+                <a href="{{ route('pegawai.pdf') }}" class="">
+                    <button><i class="exp-btn fa-solid fa-file-excel"></i></button>
+                </a>
+                <a href="{{ route('pegawai.export') }}" class="">
+                    <button><i class="exp-btn fa-solid fa-file-pdf"></i></button>
+                </a>
+            </div>
+        </div>
+    </div>
   <div class="overflow-hidden w-fit relative mx-auto mt-8">
     <table class="mb-3 text-sm text-center w-full mx-auto" id="example">
         <thead class="text-md bg-gray-100 text-basic border font-pop">
@@ -33,16 +54,16 @@
                 
                 <td class="gap-2 flex justify-between items-center p-3">
                   {{-- <form action=""  method="POST"></form> --}}
-                    <a href="/edit-pegawai/{{ $p->id }}" class="text-white bg-sky-300 hover:bg-sky-500 rounded-lg text-sm py-3 px-3">
+                    <a href="/pegawai/{{ $p->id }}/edit" class="action-btn bg-sky-300 hover:bg-sky-500">
                       <i class="fa-solid fa-pen"></i>
                     </a>
-                    <a href="#" data-id="{{ $p->id }}" class="text-white delete bg-red-500 hover:bg-red-800 rounded-lg text-sm py-3 px-3">
+                    <a href="#" data-id="{{ $p->id }}" class="action-btn delete bg-red-500 hover:bg-red-800">
                       <i class="fa-solid fa-trash"></i>                   
                     </a>
                     {{-- <button type="submit" class="text-white delete bg-red-500 rounded-lg text-sm py-3 px-3">
                       <i class="fa-solid fa-trash"></i>                   
                     </button> --}}
-                    <a href="/show-pegawai/{{ $p->id }}" class="text-white bg-gray-500 hover:bg-gray-800 hover:text-white rounded-lg text-sm py-3 px-3">
+                    <a href="/pegawai/{{ $p->id }}" class="action-btn bg-gray-500 hover:bg-gray-800">
                       <i class="fa-solid fa-eye"></i>
                     </a>
                 </td>
@@ -75,7 +96,7 @@
     })
     .then((willDelete) => {
       if (willDelete) {
-        window.location = "/delete-pegawai/"+id+""
+        window.location = "/pegawai/"+id+""
         swal("BAM! Data berhasil dihapus:(", {
           icon: "success",
         });

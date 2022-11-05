@@ -3,7 +3,23 @@
 @tailwind utilities;
 
 @layer components {
-  .input-area {
-    @apply bg-ebony-clay-500 border-0 text-gray-900 text-lg font-semibold rounded-xl focus:outline-none focus:bg-gray-300 shadow-md block w-full p-2.5;
-  }
+    .input-area {
+        @apply bg-ebony-clay-500 border-0 text-gray-900 text-lg font-semibold rounded-xl focus:outline-none focus:bg-gray-300 shadow-md block w-full p-2.5;
+    }
+
+    .add-btn {
+        @apply hover:text-ebony-clay-900 hover:bg-alejandro-300 transition-all duration-300 text-ebony-clay-800 shadow-md py-2 px-3 w-36 bg-alejandro-200 rounded-lg font-extrabold font-main h-fit ease-in delay-[100] hover:-translate-y-1 hover:shadow-lg;
+    }
+
+    .exp-btn {
+        @apply text-4xl text-ebony-clay-900 hover:text-ebony-clay-800 transition-all ease-in delay-[100] hover:-translate-y-1 hover:shadow-lg;
+    }
+
+    .action-btn {
+        @apply rounded-lg text-sm py-3 px-3 text-white hover:text-white transition-all duration-300 ease-in delay-[100] hover:-translate-y-1 hover:shadow-lg;
+    }
+
+    .nav-item {
+        @apply flex pl-8 items-center p-2 font-normal rounded-lg hover:text-gray-100 hover:bg-[#5A6C7C];
+    }
 }
